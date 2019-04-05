@@ -1,5 +1,5 @@
-//get user phone data
-exports.login = (req, res, next) => {
+//insert 
+exports.insert = (req, res, next) => {
     //getting data by POST
     const cpf =  req.body.cpf;
     const name =  req.body.name;
@@ -11,16 +11,71 @@ exports.login = (req, res, next) => {
     global.connection.query(
         `INSERT INTO 
             tbl_pessoa_fisica(cpf, nome, email,
-                usuario, senha)
+                usuario, senha, status)
          VALUES(
              '${cpf}', '${name}', '${email}', 
-             '${user}', ${password}
+             '${user}', ${password}, 0
              )`,
-             function (error, contact){
+             function (error){
                  if(error) throw error;
                  console.log(" a new contact´s address was added to database");
                  res.json({'status': 200, 'message': 
                  'Cadastro realizado com sucesso!'});
              }
         );
+};
+
+//select by id
+exports.selectById = (req, res) => {
+    const id = req.params.user_id;
+
+    global.connection.query(
+        `SELECT 
+            cpf, nome, email, usuario
+        FROM 
+            tbl_pessoa_fisica
+        WHERE 
+            id_p_fisica = ${id}`,
+        function(error, result){
+            if(error) throw error;
+            res.json({'status': 200, 'response': 
+            result});
+        } 
+    );
+};
+
+//update user
+exports.update = (req, res) => {
+    const id = req.params.user_id;
+
+     //getting data by POST
+     const cpf =  req.body.cpf;
+     const name =  req.body.name;
+     const email =  req.body.email;
+     const user =  req.body.user;
+    
+     global.connection.query(`UPDATE tbl_pessoa_fisica 
+     SET cpf = '${cpf}', nome = '${name}', 
+     email = '${email}', usuario = '${user}' 
+     WHERE id_p_fisica = ${id}`, function(error){
+         if(error) throw error;
+         res.json({"status":"200", 
+         "message":"seus dados foram atualizados com sucesso!"});
+    });
+};
+
+//update user password
+exports.updatePassword = (req, res) => {
+    const id = req.params.user_id;
+
+     //getting data by POST
+     const password =  req.body.password;
+    
+     global.connection.query(`UPDATE tbl_pessoa_fisica 
+     SET senha = '${password}' 
+     WHERE id_p_fisica = ${id}`, function(error){
+         if(error) throw error;
+         res.json({"status":"200", 
+         "message":"senha atualizada com sucesso!"});
+    });
 };

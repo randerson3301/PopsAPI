@@ -33,5 +33,6 @@ const route = require('./router');
 //esses devem estar no file de routes
 app.use('/', index);
 app.use('/promo/', route);
+app.use('/users/', route);
 
 module.exports = app;
