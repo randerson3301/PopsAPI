@@ -18,7 +18,7 @@ app.use(function(req, res, next){
 		host     : 'localhost',
 		user     : 'root',
 		password : 'bcd127',
-		database : 'db_pops'
+		database : 'db_popsodadrink'
 	});
 	connection.connect();
 	next();

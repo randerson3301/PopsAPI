@@ -7,7 +7,7 @@ const userController =  require('./controller/userController');
 
 //config route for promotions
 router.get('/', promoController.get);
-router.get('/subscribe/:user_id/:promo_id', promoController.subscribeUser);
+router.get('/subscribe/:user_id/:promo_id', promoController.subscribeUser); //com problemas -> undefined no WHERE
 
 //config routes to user operations
 router.post('/add', userController.insert);
