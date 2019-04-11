@@ -10,7 +10,6 @@ function normalizaPort(val){
         return val;
     }
 
-    //para podermos obter a porta é necessário que ela seja maior ou igual que 0
     if(port >= 0){
         return port;
     }

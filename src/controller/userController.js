@@ -79,3 +79,27 @@ exports.updatePassword = (req, res) => {
          "message":"senha atualizada com sucesso!"});
     });
 };
+
+//user authentication
+exports.login = (req, res) => {
+    const username = req.body.user;
+    const password = req.body.password;
+
+    global.connection.query(`
+      SELECT 
+        cpf, nome, email, usuario 
+      FROM 
+        tbl_pessoa_fisica 
+      WHERE
+        usuario = '${username}' AND senha = '${password}'`,
+        function(error, result){
+            
+            if(error) return error;
+           // console.log(result);
+            if(result[0] == null){
+                res.json({"success":false, "message": "não foi!", "response": result});
+            } else {
+                res.json({"success":true, "message": "Autenticado com sucesso!", "response": result});
+            }
+        });
+}

@@ -1,8 +1,9 @@
 
 //Essa função irá validar se o usuário já está cadastrado numa promoção específica
-exports.verifyUserAlreadySubscribed = (userId, promoId, res) => {
-    const id = userId;
-    const promo = promoId;
+exports.verifyUserAlreadySubscribed = (user_id, promo_id) => {
+  
+    const id = user_id;
+    const promo = promo_id;
 
     global.connection.query(`
         SELECT * FROM 
@@ -11,8 +12,11 @@ exports.verifyUserAlreadySubscribed = (userId, promoId, res) => {
     function(error, response){
         if(error) throw error;
       // console.log("Nº de linhas: " + response.length);
-
-       return response.length;
-           
+       console.log(response.length);
+       if(response[0] == null) {
+         return true;
+            //return result;
+       } 
+        return false;
      });
 };

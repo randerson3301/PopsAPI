@@ -29,10 +29,8 @@ const index = require('./routes/index');
 const route = require('./router');
 
 //config endpoints
-//nesses endpoints não são necessários parametros,
-//esses devem estar no file de routes
 app.use('/', index);
-app.use('/promo/', route);
-app.use('/users/', route);
+app.use('/', route);
+
 
 module.exports = app;
