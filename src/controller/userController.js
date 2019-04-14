@@ -7,6 +7,7 @@ exports.insert = (req, res, next) => {
     const user =  req.body.user;
     const password =  req.body.password;
 
+    console.log(cpf);
 
     global.connection.query(
         `INSERT INTO 
@@ -14,12 +15,12 @@ exports.insert = (req, res, next) => {
                 usuario, senha, status)
          VALUES(
              '${cpf}', '${name}', '${email}', 
-             '${user}', ${password}, 0
+             '${user}', '${password}', 1
              )`,
              function (error){
                  if(error) throw error;
                  console.log(" a new contact´s address was added to database");
-                 res.json({'status': 200, 'message': 
+                 res.json({'success': true, 'message': 
                  'Cadastro realizado com sucesso!'});
              }
         );
@@ -97,7 +98,7 @@ exports.login = (req, res) => {
             if(error) return error;
            // console.log(result);
             if(result[0] == null){
-                res.json({"success":false, "message": "não foi!", "response": result});
+                res.json({"success":false, "message": "não foi possível realizar a autenticação!", "response": result});
             } else {
                 res.json({"success":true, "message": "Autenticado com sucesso!", "response": result});
             }

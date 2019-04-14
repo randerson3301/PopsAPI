@@ -14,23 +14,23 @@ var mysql = require('mysql');
 
 //Conexão com o banco
 app.use(function(req, res, next){
+	//set mysql.createConnection({multipleStatements: true});
 	global.connection = mysql.createConnection({
 		host     : 'localhost',
 		user     : 'root',
-		password : 'bcd127',
-		database : 'db_popsodadrink'
+		password : 'r4nd3rs0n',
+		database : 'db_popsodadrink',
+		multipleStatements: true
 	});
 	connection.connect();
 	next();
 });
 
 //rotas
-const index = require('./routes/index');
-const route = require('./router');
+const routes = require('./router');
 
 //config endpoints
-app.use('/', index);
-app.use('/', route);
+app.use('/', routes);
 
 
 module.exports = app;
