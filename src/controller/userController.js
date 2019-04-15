@@ -83,7 +83,7 @@ exports.updatePassword = (req, res) => {
 
 //user authentication
 exports.login = (req, res) => {
-    const username = req.body.user;
+    const user= req.body.user;
     const password = req.body.password;
 
     global.connection.query(`
@@ -92,7 +92,7 @@ exports.login = (req, res) => {
       FROM 
         tbl_pessoa_fisica 
       WHERE
-        usuario = '${username}' AND senha = '${password}'`,
+        usuario = '${user}' AND senha = '${password}'`,
         function(error, result){
             
             if(error) return error;

@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const bodyParser = require('body-parser');
+
+//config body-parser
+router.use(bodyParser.json()); //suporta os dados dos bodies do json
+router.use(bodyParser.urlencoded({extended: true})); //suporta bodies encoded
+
+
+
 //instanciando controllers
 const promoController = require('./controller/promocaoController');
 const userController =  require('./controller/userController');
