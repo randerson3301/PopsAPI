@@ -18,7 +18,7 @@ app.use(function(req, res, next){
 	global.connection = mysql.createConnection({
 		host     : 'localhost',
 		user     : 'root',
-		password : 'bcd127',
+		password : 'r4nd3rs0n',
 		database : 'db_popsodadrink',
 		multipleStatements: true
 	});

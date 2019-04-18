@@ -32,7 +32,7 @@ exports.selectById = (req, res) => {
 
     global.connection.query(
         `SELECT 
-            cpf, nome, email, usuario
+           id_p_fisica, cpf, nome, email, usuario
         FROM 
             tbl_pessoa_fisica
         WHERE 
@@ -88,7 +88,7 @@ exports.login = (req, res) => {
 
     global.connection.query(`
       SELECT 
-        cpf, nome, email, usuario 
+      id_p_fisica, cpf, nome, email, usuario 
       FROM 
         tbl_pessoa_fisica 
       WHERE
