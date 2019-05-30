@@ -46,10 +46,12 @@ router.post('/user/login', userController.login);
 //config routes brindes
 router.get('/brinde', brindeController.select);
 router.get('/brinde/:brinde_id', brindeController.selectById);
+router.post('/brinde/buy', brindeController.buy);
 
 //config routes lugares
 router.get('/lugar/:q', placesController.searchPlaces);
 router.get('/lugar/address/:cnpj', placesController.getAddress);
+router.get('/estabelecimentos', placesController.select);
 
 //export router
 module.exports = router;
