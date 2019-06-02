@@ -11,6 +11,17 @@ exports.select = (req, res) => {
     })
 };
 
+//select all compras
+exports.selectCompras = (req, res) => {
+    const idPF = req.params.id_p_fisica;
+    //data from brindes
+    global.connection.query(`SELECT * FROM tbl_compra_brinde WHERE id_p_fisica = ${idPF}`,
+    function(error, result){
+        if(error) throw error;
+        res.json({"response": result});
+    })
+};
+
 
 //select by id
 exports.selectById = (req, res) => {
@@ -30,6 +41,54 @@ exports.selectById = (req, res) => {
         } 
     );
 };
+
+exports.insert = (req, res) => {
+    //getting data by POST
+    const id_p_fisica =  req.body.id_p_fisica;
+    const dt_compra =  req.body.dt_compra;
+    const valor_total =  req.body.valor_total;
+    const status_pedido =  req.body.status_pedido;
+    const logradouro =  req.body.logradouro;
+    const bairro =  req.body.bairro;
+    const cidade =  req.body.cidade;
+    const uf =  req.body.uf;
+
+    global.connection.query(
+        `INSERT INTO tbl_compra_brinde
+        (
+            id_p_fisica,
+            dt_compra,
+            valor_total,
+            peso_total,
+            volume_total,
+            status_pedido,
+            status,
+            logradouro,
+            bairro,
+            cidade,
+            uf)
+        VALUES
+            (
+            ${id_p_fisica},
+            '${dt_compra}',
+            ${valor_total},
+            1,
+            1,
+            '${status_pedido}',
+            1,
+            '${logradouro}',
+            '${bairro}',
+            '${cidade}',
+            '${uf}')`,
+             function (error){
+                 if(error) throw error;
+                 res.json({'success': true, 'message': 
+                    'Compra realizada com sucesso!'});
+             }
+        );
+};
+
+
 
 //conexão com pagar.me
 exports.buy = (req, res) => {

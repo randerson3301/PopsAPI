@@ -33,7 +33,7 @@ router.get('/', function(req, res, next){
 
 //config route for promotions
 router.get('/promo', promoController.select);
-router.get('/promo/subscribe/:user_id/:promo_id', promoController.subscribeUser); //com problemas -> undefined no WHERE
+router.get('/promo/subscribe/:user_id/:promo_id', promoController.subscribeUser); 
 
 //config routes to user operations
 router.get('/user/:user_id', userController.selectById);
@@ -45,8 +45,11 @@ router.post('/user/login', userController.login);
 
 //config routes brindes
 router.get('/brinde', brindeController.select);
+router.get('/brinde/compras/:id_p_fisica', brindeController.selectCompras);
 router.get('/brinde/:brinde_id', brindeController.selectById);
 router.post('/brinde/buy', brindeController.buy);
+router.post('/brinde/add', brindeController.insert);
+
 
 //config routes lugares
 router.get('/lugar/:q', placesController.searchPlaces);
